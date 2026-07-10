@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-from parse_post import parse, strip_emoji
+from parse_post import parse, strip_emoji, full_caption
 
 W = H = 1080
 NAVY = (15, 37, 71)
@@ -86,9 +86,12 @@ def main(post_dir):
         p = out / f"card_{i:02d}.png"
         img.save(p, "PNG")
         paths.append(p)
+    cap_path = post_dir / "caption.txt"
+    cap_path.write_text(full_caption(parsed), encoding="utf-8")
     print(f"생성 완료: {total}장 -> {out}")
     for p in paths:
         print(f"  {p.name}")
+    print(f"캡션(붙여넣기용): {cap_path}")
 
 
 if __name__ == "__main__":

@@ -1,10 +1,13 @@
-"""생성된 카드 이미지를 인스타그램 캐러셀로 게시 (Instagram Graph API).
+"""생성된 카드 이미지를 인스타그램 캐러셀로 게시 (Instagram API with Instagram Login).
 
 전제:
-- 인스타그램 프로페셔널(비즈니스/크리에이터) 계정 + 페이스북 페이지 연결
-- .env: IG_USER_ID, IG_ACCESS_TOKEN, IMAGE_BASE_URL
-- Graph API는 로컬 파일 업로드 불가 → 이미지는 공개 URL이어야 함.
+- 인스타그램 프로페셔널(비즈니스/크리에이터) 계정 — 페이스북 페이지·비즈니스 매니저 불필요
+- .env: IG_USER_ID, IG_ACCESS_TOKEN(Instagram User access token), IMAGE_BASE_URL
+- API는 로컬 파일 업로드 불가 → 이미지는 공개 URL이어야 함.
   이 repo(GitHub)에 이미지를 먼저 push하고 raw URL을 IMAGE_BASE_URL로 사용한다.
+
+토큰·IG_USER_ID는 앱 대시보드 → Instagram → "API 설정(Instagram 로그인)"에서
+인스타 계정 연결 후 토큰 생성으로 발급 (README 참고).
 
 사용법: python src/upload_instagram.py posts/2026-07-09
 """
@@ -18,7 +21,7 @@ from dotenv import load_dotenv
 
 from parse_post import parse, full_caption
 
-GRAPH = "https://graph.facebook.com/v21.0"
+GRAPH = "https://graph.instagram.com/v21.0"
 
 
 def _post(path, data):
